@@ -1,3 +1,4 @@
+# код из документации numpy
 import numpy as np
 import matplotlib.pyplot as plt
 def mandelbrot(h, w, maxit=20, r=2):
