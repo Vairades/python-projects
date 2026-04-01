@@ -33,9 +33,9 @@ n_exp = 100
 n_time = cash**2
 dat = rng.choice([-1,1],p=[0.5,0.5],size=(n_exp,n_time))
 dat = np.cumsum(dat,axis=1) + cash
-dat[dat < 0] = 0
-dt = dat.T
-print(f"вероятность не обнулиться={np.count_nonzero(dt[-1])/n_exp} время={n_time}")
+ruin = np.maximum.accumulate(dat<=0,axis=1)
+dat = np.where(ruin,0,dat)
+print(f"вероятность не обнулиться={(dat[:,-1]>0).mean()} время={n_time}")
 
 fig, ax = plt.subplots()
 ax.plot(dat.T)
